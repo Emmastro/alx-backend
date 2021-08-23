@@ -3,7 +3,6 @@
 
 
 import csv
-import math
 from typing import List
 
 
@@ -34,16 +33,16 @@ class Server:
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         """ get items in a page """
-        assert type(page) == int and type(page_size) == int
-        assert page > 0 and page_size > 0
+        assert type(page) == int or type(page_size) == int
+        assert page > 0 or page_size > 0
 
         start, end = self.index_range(page, page_size)
 
-        csv_file = self.get_dataset()
+        data = self.get_dataset()
 
         list_result = []
 
-        if start >= len(self.dataset()):
+        if start >= len(data):
             return list_result
 
-        return csv_file[start:end]
+        return data[start:end]
